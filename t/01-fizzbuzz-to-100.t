@@ -24,7 +24,7 @@ my @inputOutputTable =
 ;
 
 for @inputOutputTable -> $in, $out {
-    is FizzBuzz::fizzbuzz($in), $out, "FizzBuzz($in) = $out";
+    is $in.fizzbuzz, $out, "FizzBuzz($in) = $out";
 }
 
 done;

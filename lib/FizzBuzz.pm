@@ -1,14 +1,18 @@
 #/usr/bin/env perl6
 use v6;
-module FizzBuzz;
 
-our sub fizzbuzz(Int $n) {
-    given $n {
-        when    $n % (3*5) == 0 { "FizzBuzz" }
-        when    $n % 3     == 0 { "Fizz"     }
-        when    $n % 5     == 0 { "Buzz"     }
-        default                 { $n         }
+# extending a system class. but this is pretty bad style.
+use MONKEY_TYPING;
+
+augment class Int {
+    method fizzbuzz() {
+        given self {
+            when    self % (3*5) == 0 { "FizzBuzz" }
+            when    self % 3     == 0 { "Fizz"     }
+            when    self % 5     == 0 { "Buzz"     }
+            default                   { self       }
+        }
     }
 }
 
-for 1..100 { say fizzbuzz($_) };
+for 1..100 { .fizzbuzz.say };
